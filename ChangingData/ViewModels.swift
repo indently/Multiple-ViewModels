@@ -29,10 +29,12 @@ class ViewModelTwo: ObservableObject {
     
     init(data: OverallData) {
         self.data = data
+        self.localCount = data.count
     }
     
     func incrementCount() {
         data.count += 1
         print("ViewModel 2 is being used.")
     }
+    
 }

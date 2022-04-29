@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject var data: OverallData
+    @ObservedObject var data: OverallData
     @StateObject private var vm: ViewModel
     
     init(data: OverallData) {
-        _data = StateObject(wrappedValue: data)
+        _data = ObservedObject(wrappedValue: data)
         _vm = StateObject(wrappedValue: ViewModel(data: data))
     }
     

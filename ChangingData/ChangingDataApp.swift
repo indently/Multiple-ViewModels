@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct ChangingDataApp: App {
-    private let data = OverallData()
+    @StateObject var data = OverallData()
     
     var body: some Scene {
         WindowGroup {
