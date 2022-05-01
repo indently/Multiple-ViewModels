@@ -6,9 +6,14 @@
 //
 
 import Foundation
+import SwiftUI
 
 class MainData: ObservableObject {
-    @Published var count = 0
+    @AppStorage("COUNT_KEY") var count: Int = 0 {
+        willSet {
+            objectWillChange.send()
+        }
+    }
     
     init() {
         print("MainData init called")
