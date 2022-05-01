@@ -8,12 +8,13 @@
 import SwiftUI
 
 struct CountView: View {
-    @ObservedObject var data: OverallData
+    @ObservedObject var data: MainData
     @StateObject private var vm2: ViewModelTwo
     
-    init(data: OverallData) {
-        _data = ObservedObject(wrappedValue: data)
-        _vm2 = StateObject(wrappedValue: ViewModelTwo(data: data))
+    init() {
+        @Inject var dataValue: MainData
+        _data = ObservedObject(wrappedValue: dataValue)
+        _vm2 = StateObject(wrappedValue: ViewModelTwo())
     }
 
     var body: some View {
@@ -22,6 +23,7 @@ struct CountView: View {
             Button("External button") {
                 vm2.incrementCount()
             }
+            .tint(.indigo)
         }
         .padding()
         .background(.thinMaterial)
@@ -32,7 +34,6 @@ struct CountView: View {
 
 struct CountView_Previews: PreviewProvider {
     static var previews: some View {
-        CountView(data: OverallData())
-        
+        CountView()
     }
 }

@@ -9,11 +9,14 @@ import SwiftUI
 
 @main
 struct ChangingDataApp: App {
-    @StateObject var data = OverallData()
+    init() {
+        @Provider var data = MainData()
+        @Provider var printLogs = PrintLogs()
+    }
     
     var body: some Scene {
         WindowGroup {
-            ContentView(data: data)
+            ContentView()
         }
     }
 }

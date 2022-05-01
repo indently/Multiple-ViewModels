@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct ContentView: View {
-    @ObservedObject var data: OverallData
+    @ObservedObject var data: MainData
     @StateObject private var vm: ViewModel
     
-    init(data: OverallData) {
-        _data = ObservedObject(wrappedValue: data)
-        _vm = StateObject(wrappedValue: ViewModel(data: data))
+    init() {
+        @Inject var dataValue: MainData
+        
+        _data = ObservedObject(wrappedValue: dataValue)
+        _vm = StateObject(wrappedValue: ViewModel())
     }
     
     var body: some View {
@@ -21,14 +23,19 @@ struct ContentView: View {
             Button("Increment (\(data.count))") {
                 vm.incrementCount()
             }
-
-            CountView(data: data)
+            
+            CountView()
+            
+            Button("\(vm.timeString)") {
+                vm.updateTime()
+            }
+            .tint(.green)
         }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(data: OverallData())
+        ContentView()
     }
 }
